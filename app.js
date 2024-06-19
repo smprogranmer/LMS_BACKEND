@@ -3,9 +3,18 @@ import { config } from "dotenv";
 import cookieParser from "cookie-parser";
 import apiErrorHandler from "./middlewares/apiErrorHandler.js";
 import cors from "cors";
+import mongodb_url from "./config/db.js";
+import usersRouter from "./routes/Users.route.js";
+import coursesRouter from "./routes/Courses.route.js";
+import { courses } from "./seed/user.js";
+
 config({
   path: "./config/.env",
 });
+// const envMode = process.env.NODE_ENV.trim() || "PRODUCTION";
+console.log("🚀 ~ envMode:", process.env.NODE_DEV);
+console.log("🚀 ~ envMode:", process.env.PORT);
+const PORT = process.env.PORT || 3000;
 
 // cors config 
 const corsOptions = {
@@ -26,14 +35,23 @@ app.get("/", (req, res) => {
 
 // courses()
 // routes 
-import usersRouter from "./routes/Users.route.js";
-import coursesRouter from "./routes/Courses.route.js";
-import { courses } from "./seed/user.js";
+
 app.use("/api/v1/", usersRouter);
 
 app.use("/api/v1/", coursesRouter);
 
 app.use(apiErrorHandler);
+
+
+mongodb_url()
+.then(() =>{
+  app.listen(PORT, (req,res) =>{
+    console.log(`Server is listening on port ${process.env.PORT}`);
+  })
+})
+.catch((error) =>{
+  console.log(`MongoDb connection error ${error}`)
+})
 
 export default app
 
