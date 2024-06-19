@@ -14,7 +14,6 @@ import sendToken from "../utils/sendToken.js";
  */
 const registerUsers = catchAsyncError(async (req, res, next) => {
   const { firstName, lastName, email,phone, password, gender } = req.body;
-  console.log(firstName,lastName, email,phone, password, gender)
 
   if (!firstName || !lastName || !email || !phone || !password || !gender) {
     return next(new ErrorHandler(400, "All fields are required"));
@@ -27,7 +26,6 @@ const registerUsers = catchAsyncError(async (req, res, next) => {
   }
 
   const newUsers = await users.create({ firstName,lastName, email,phone, password, gender });
-  console.log("🚀 ~ registerUsers ~ newUsers:", newUsers)
 
   // sendToken(newUsers, 201, res);
   

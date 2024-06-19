@@ -92,7 +92,6 @@ export const purchaseCourse = catchAsyncError(async (req, res, next) => {
 
   // Add the user to the course's student list
   existingCourse.students.push(req.user);
-  console.log(req);
 
   // Save the updated course
   const updatedCourse = await existingCourse.save();

@@ -8,7 +8,6 @@ cloudinary.config({
 
 
  export const uploadOnCloudinary = async (localFile) =>{
-    console.log("djsfkdsjkfsdj",localFile)
 
     try {
         if(!localFile)return null
@@ -17,7 +16,6 @@ cloudinary.config({
             resource_type: "auto",
             folder:"NIBH_IMAGES"
         })
-        console.log(`file uploaded on cloudinary => ${res}`)
         return res
     } catch (error) {
         console.log(error)
@@ -34,7 +32,6 @@ const multiple = (images) =>{
         }
         
         )
-        console.log("🚀 ~ file: cloudinary.js:36 ~ multiple ~ uploads:", uploads.secure_url)
         return uploads
     } catch (error) {
         
@@ -44,12 +41,10 @@ const multiple = (images) =>{
 const uploadPromises = (files) =>{
     files.map(async (file) => {
         try {
-          console.log('Start Cloudinary Upload:', new Date().toISOString());
           const base64Data = file.buffer.toString('base64');
           const result = await cloudinary.uploader.upload(`data:${file.mimetype};base64,${base64Data}`, {
             folder: 'your-folder',
           });
-          console.log('End Cloudinary Upload:', new Date().toISOString());
           return result;
         } catch (error) {
           console.error('Cloudinary Upload Error:', error);

@@ -17,8 +17,6 @@ const isAuthenticatedUser = catchAsyncError(async(req,res,next)=>{
         }
         req.user = decodeDate.id
 
-        console.log(decodeDate)
-
         
         next()
     } catch (error) {

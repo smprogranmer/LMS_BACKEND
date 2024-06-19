@@ -14,12 +14,9 @@ export const courses = catchAsyncError(async (course) =>{
 
         })
         coursesPromise.push(tempCourse)
-        console.log(tempCourse)
     }
 
     await Promise.all(coursesPromise)
-    console.log("🚀 ~ courses ~ coursesPromise:", coursesPromise)
-    console.log("🚀 ~ courses ~ courses:", courses)
     return courses;
 
 })
