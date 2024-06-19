@@ -5,7 +5,7 @@ import mongodb_url from "./config/db.js";
 
 mongodb_url()
 .then(() =>{
-  app.listen(process.env.PORT || 8000, (req,res) =>{
+  app.listen(process.env.PORT || 3000, (req,res) =>{
     console.log(`Server is listening on port ${process.env.PORT}`);
   })
 })
